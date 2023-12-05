@@ -1,0 +1,30 @@
+.split-pane--vertical {
+  height: calc(100% - 0rem);
+  max-height: calc(100% - 0rem);
+}
+
+.split-pane-separator {
+  width: 10px;
+  cursor: col-resize;
+  user-select: none;
+  background-color: var(--bg-color-darkest);
+  border-radius: 5px;
+  transition: transform 0.2s;
+  transform: scaleX(1);
+  display: flex;
+  align-items: center;
+}
+
+.split-pane-separator--vertical {
+  height: 10px;
+  cursor: row-resize;
+  user-select: none;
+  background-color: var(--bg-color-darkest);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.split-pane-separator-icon {
+  fill: var(--text-color-secondary);
+}
