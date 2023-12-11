@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./css/splitpane.css";
 import SeparatorIcon from "../assets/icons/separator-dots.svg?react";
 import SeparatorIconVertical from "../assets/icons/separator-dots-vertical.svg?react";
@@ -47,9 +47,11 @@ export default function SplitPane({ children }) {
   );
 }
 
-SplitPane.Vertical = function SplitPane({ children, ...props }) {
+SplitPane.Vertical = function SplitPane({ children }) {
   const [paneHeight1, setPaneHeight1] = useState(230);
   const [paneHeight2, setPaneHeight2] = useState(230);
+  const splitPaneRef = useRef(null);
+  console.log(splitPaneRef.current?.offsetHeight);
 
   const handleMouseDown1 = (e) => {
     e.preventDefault();
@@ -64,11 +66,16 @@ SplitPane.Vertical = function SplitPane({ children, ...props }) {
   };
 
   const handleMouseMove1 = (e) => {
-    setPaneHeight1(e.clientY - 62);
+    if (e.clientY - 62 > 33) setPaneHeight1(e.clientY - 62);
   };
 
   const handleMouseMove2 = (e) => {
-    setPaneHeight2(e.clientY - paneHeight1 - 72);
+    console.log(e.clientY);
+    if (
+      e.clientY - paneHeight1 - 72 > 33 &&
+      e.clientY < splitPaneRef.current?.offsetHeight - 30
+    )
+      setPaneHeight2(e.clientY - paneHeight1 - 72);
   };
 
   const handleMouseUp1 = () => {
@@ -82,7 +89,7 @@ SplitPane.Vertical = function SplitPane({ children, ...props }) {
   };
 
   return (
-    <section className="split-pane split-pane--vertical">
+    <section className="split-pane split-pane--vertical" ref={splitPaneRef}>
       <div
         style={{
           display: "flex",

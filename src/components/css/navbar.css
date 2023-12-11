@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 0.5rem;
   border: none;
   padding: 5px;
 }
@@ -33,4 +33,18 @@
 
 .navbar-icon--2 path {
   stroke: var(--text-color-secondary);
+}
+
+.logo {
+  width: 34px;
+  /* margin-right: auto; */
+  margin-left: 1rem;
+}
+
+.title {
+  margin-right: auto;
+  color: var(--text-color-secondary);
+  font-family: sans-serif;
+  font-size: 22px;
+  line-height: 34px;
 }
