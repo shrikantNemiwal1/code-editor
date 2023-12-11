@@ -31,16 +31,14 @@ function App() {
   );
   const [input, setInput] = useState("");
   const [expOutput, setExpOutput] = useState("");
-  const [output, setOutput] = useState(
-    `#include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n    cout << "Hello World!" << endl;\n    return 0;\n} #include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n    cout << "Hello World!" << endl;\n    return 0;\n} #include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n    cout << "Hello World!" << endl;\n    return 0;\n} #include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n    cout << "Hello World!" << endl;\n    return 0;\n}`
-  );
+  const [output, setOutput] = useState(``);
   const [language, setLanguage] = useState(languages[0]);
   const [isSuccess, setIsSuccess] = useState(true);
 
   const handleRunCode = async () => {
     console.log(code);
     try {
-      await fetch("http://localhost:3000/runcode", {
+      await fetch("https://code-editor-server-5hkf.onrender.com/runcode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
