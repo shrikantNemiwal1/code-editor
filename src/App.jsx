@@ -25,7 +25,6 @@ import Settings from "./components/Settings";
 import Sidebar from "./components/Sidebar";
 import Files from "./components/Files";
 import { useEffect } from "react";
-// import "codemirror/mode/clike/clike";
 
 const languages = [
   "C++",
@@ -87,7 +86,11 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code, input, language }),
+        body: JSON.stringify({
+          code: code[languagesCode[language]],
+          input,
+          language,
+        }),
       })
         .then((response) => response.json())
         .then((data) => {
