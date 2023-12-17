@@ -3,13 +3,26 @@
   --bg-color-darker: #282828;
   --bg-color-dark: #303030;
   --text-color-primary: #ffffff;
-  --text-color-secondary: #fff9;
+  --text-color-secondary: #a3a3a3;
   --text-color-tertiary: #ffa116;
   --color-gray-dark: #514848;
   --color-gray-light: #745959;
   --color-success: #66bb6a;
   --color-error: #f44336;
   --color-warning: #ffa726;
+  --icon-color: #a3a3a3;
+}
+
+.light-mode {
+  --bg-color-darkest: #f0f0f0;
+  --bg-color-darker: #ffffff;
+  --bg-color-dark: #fafafa;
+  --text-color-primary: #000000;
+  --text-color-secondary: #797979;
+  --text-color-tertiary: #ffa116;
+  --color-gray-dark: #ededed;
+  --color-gray-light: #efe8e8;
+  --icon-color: #a3a3a3;
 }
 
 body {
@@ -20,6 +33,7 @@ body {
 main {
   background-color: var(--bg-color-darkest);
   padding: 8px;
+  padding-top: 3.7rem;
 }
 
 .container {
@@ -67,11 +81,21 @@ main {
   left: 0;
   width: 100%;
   z-index: 3;
+  gap: 5px;
 }
 
-.code-header{
+.code-header {
   top: -2rem;
-  border-radius: 5px 5px 0 0 ;
+  border-radius: 5px 5px 0 0;
+}
+
+.code-header span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.code-header span {
+  margin-right: auto;
 }
 
 .textarea--success {
@@ -83,32 +107,53 @@ main {
 }
 
 .cm-theme {
-  border-radius: 0 0 .5rem .5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
   overflow: hidden;
   text-align: start;
 }
 
 .run-btn {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  padding: 0.4rem 0.8rem;
-  margin-top: 10px;
+  padding: 0.4rem 0.7rem 0.4rem 1rem;
+  margin-top: 1px;
   margin-left: auto;
   border-radius: 0.4rem;
   border: none;
   background-color: var(--text-color-tertiary);
-  color: var(--text-color-primary);
+  color: white;
   gap: 5px;
+}
+
+.run-btn--gray {
+  background-color: var(--color-gray-dark);
 }
 
 .code-section {
   text-align: end;
 }
 
+.code-section--fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  width: 100vw;
+  height: 100vh;
+  text-align: end;
+}
+
 .ͼ1 {
   background-color: var(--bg-color-darker);
+}
+
+.ͼ3 .cm-gutters {
+  background-color: var(--bg-color-dark);
 }
 
 ::-webkit-scrollbar {

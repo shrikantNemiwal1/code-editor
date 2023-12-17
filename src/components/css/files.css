@@ -1,0 +1,135 @@
+.files-container {
+  /* padding-top: 3rem; */
+}
+
+.files-container ul {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: var(--text-color-primary);
+  overflow-y: auto;
+  height: calc(100vh - 5rem);
+  padding: 0.5rem;
+  margin-top: 0;
+  border-top: solid 1px var(--color-gray-light);
+}
+
+.files-header {
+  padding: 0.5rem;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.2rem 0rem 0.2rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-name {
+  background-color: transparent;
+  border: none;
+  color: var(--text-color-primary);
+  padding: 5px 8px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  width: 12rem;
+}
+
+.file-name--disabled {
+  width: 12rem;
+  padding-left: 0.5rem;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.file-name:focus {
+  outline: none;
+  border: 1px solid var(--text-color-secondary);
+}
+
+.file:hover {
+  background-color: var(--color-gray-dark);
+}
+
+.file-options-button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  margin-left: auto;
+  padding-top: 3px;
+  padding: 0.5rem;
+  height: 100%;
+  width: 2rem;
+}
+
+.file-options-button:focus .file-options,
+.file-options:hover {
+  display: block;
+}
+
+.file-options-button:hover .file-options-icon {
+  fill: var(--text-color-primary);
+}
+
+.file-options {
+  position: absolute;
+  display: none;
+  top: 1rem;
+  right: 1.2rem;
+  z-index: 20;
+  pointer-events: all;
+  border-radius: 5px;
+  background-color: var(--bg-color-dark);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px;
+  overflow: hidden;
+  /* border: 1px solid rgb(63, 63, 63); */
+}
+
+.file-option {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-color-secondary);
+  padding: 0.4rem 0.7rem;
+  width: 100%;
+}
+
+.file-option:hover {
+  background-color: var(--color-gray-dark);
+  color: var(--text-color-primary);
+}
+
+.add-file-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background-color: transparent;
+  padding: 0.5rem;
+  padding-right: 0.7rem;
+  border-radius: 0.5rem;
+  user-select: none;
+}
+
+.add-file-btn span {
+  color: var(--text-color-secondary);
+  font-size: 16px;
+}
+
+.add-file-btn:hover {
+  background-color: var(--color-gray-dark);
+}
+
+.add-file-btn:active {
+  background-color: var(--color-gray-light);
+}

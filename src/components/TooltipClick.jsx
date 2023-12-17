@@ -6,7 +6,7 @@ export default function TooltipClick(props) {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const showTooltip = () => {
     console.log("click");
-    navigator.clipboard.writeText(value);
+    if (value) navigator.clipboard.writeText(value);
     setIsTooltipVisible(true);
     setTimeout(() => {
       setIsTooltipVisible(false);

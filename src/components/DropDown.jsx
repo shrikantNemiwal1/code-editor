@@ -16,7 +16,12 @@ const DropDown = ({ options, value, onChange }) => {
         {options.map((item) => {
           return (
             <li key={item}>
-              <button onClick={() => onChange(item)}>{item}</button>
+              <button
+                className={value === item ? "dropdown-option--active" : ""}
+                onClick={() => onChange(item)}
+              >
+                {item}
+              </button>
             </li>
           );
         })}

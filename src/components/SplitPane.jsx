@@ -5,6 +5,7 @@ import SeparatorIconVertical from "../assets/icons/separator-dots-vertical.svg?r
 
 export default function SplitPane({ children }) {
   const [paneWidth, setPaneWidth] = useState(500);
+  const splitPaneRef = useRef(null);
 
   const handleMouseDown = (e) => {
     e.preventDefault();
@@ -13,7 +14,8 @@ export default function SplitPane({ children }) {
   };
 
   const handleMouseMove = (e) => {
-    setPaneWidth(e.clientX - 12);
+    if (e.clientX > 300 && e.clientX < splitPaneRef?.current?.offsetWidth - 300)
+      setPaneWidth(e.clientX - 12);
   };
 
   const handleMouseUp = () => {
@@ -22,7 +24,7 @@ export default function SplitPane({ children }) {
   };
 
   return (
-    <section className="split-pane">
+    <section className="split-pane" ref={splitPaneRef}>
       <div style={{ display: "flex", height: "calc(100% - 5rem)" }}>
         <div
           style={{
@@ -51,7 +53,6 @@ SplitPane.Vertical = function SplitPane({ children }) {
   const [paneHeight1, setPaneHeight1] = useState(230);
   const [paneHeight2, setPaneHeight2] = useState(230);
   const splitPaneRef = useRef(null);
-  console.log(splitPaneRef.current?.offsetHeight);
 
   const handleMouseDown1 = (e) => {
     e.preventDefault();
@@ -70,7 +71,6 @@ SplitPane.Vertical = function SplitPane({ children }) {
   };
 
   const handleMouseMove2 = (e) => {
-    console.log(e.clientY);
     if (
       e.clientY - paneHeight1 - 72 > 33 &&
       e.clientY < splitPaneRef.current?.offsetHeight - 30

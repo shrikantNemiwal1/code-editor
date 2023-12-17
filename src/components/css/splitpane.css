@@ -15,6 +15,11 @@
   align-items: center;
 }
 
+.split-pane-separator:hover .split-pane-separator-icon,
+.split-pane-separator--vertical:hover .split-pane-separator-icon {
+  fill: var(--text-color-primary);
+}
+
 .split-pane-separator--vertical {
   height: 10px;
   cursor: row-resize;
