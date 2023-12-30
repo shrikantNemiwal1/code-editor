@@ -60,6 +60,12 @@ const codeSlice = createSlice({
       state.codeData[state.currentCode][languages[action.payload.language]] =
         action.payload.code;
     },
+    saveInput: (state, action) => {
+      state.codeData[state.currentCode].input = action.payload;
+    },
+    saveExpOutput: (state, action) => {
+      state.codeData[state.currentCode].expOutput = action.payload;
+    },
     saveBoilerplate: (state, action) => {
       state.boilerplateData[languages[action.payload.language]] =
         action.payload.code;
@@ -93,6 +99,8 @@ const codeSlice = createSlice({
 
 export const {
   saveCode,
+  saveInput,
+  saveExpOutput,
   saveBoilerplate,
   resetToBoilerplate,
   addFile,

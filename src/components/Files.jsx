@@ -15,7 +15,7 @@ import {
 
 const Files = () => {
   const dispatch = useDispatch();
-  const codes = useSelector((state) => state.codeData);
+  const codes = useSelector((state) => state?.code?.codeData);
   const [isInputEnabled, setIsInputEnabled] = useState(
     Array(codes.length).fill(false)
   );
@@ -38,13 +38,6 @@ const Files = () => {
     setIsInputEnabled(newInputEnabled);
   };
 
-  useEffect(() => {
-    const focusedIndex = isInputEnabled.indexOf(true);
-    if (focusedIndex !== -1 && inputRefs.current[focusedIndex]) {
-      inputRefs.current[focusedIndex].current.focus();
-    }
-  }, [isInputEnabled, codes]);
-
   const handleInputChange = (index, newValue) => {
     dispatch(editFileName({ index, name: newValue }));
   };
@@ -57,6 +50,13 @@ const Files = () => {
     });
     dispatch(addFile());
   };
+
+  useEffect(() => {
+    const focusedIndex = isInputEnabled.indexOf(true);
+    if (focusedIndex !== -1 && inputRefs.current[focusedIndex]) {
+      inputRefs.current[focusedIndex].current.focus();
+    }
+  }, [isInputEnabled, codes]);
 
   return (
     <section className="files-container">
@@ -94,7 +94,9 @@ const Files = () => {
                 }}
               />
             ) : (
-              <span className="file-name--disabled">{codes[index].name}</span>
+              <span className="file-name--disabled">
+                {codes[index]?.name || "Untitled"}
+              </span>
             )}
             <button
               className="file-options-button"
