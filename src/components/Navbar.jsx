@@ -2,13 +2,15 @@ import "./css/navbar.css";
 import FolderIcon from "../assets/icons/folder.svg?react";
 import SettingIcon from "../assets/icons/setting.svg?react";
 import DropDown from "./DropDown";
-import logo from "../assets/icons/logo.png";
+import LogoIcon from "../assets/icons/logo.svg?react";
 import PlayIcon from "../assets/icons/play.svg?react";
 import StopIcon from "../assets/icons/stop.svg?react";
 import SunIcon from "../assets/icons/sun.svg?react";
 import MoonIcon from "../assets/icons/moon.svg?react";
+import LogoTextIcon from "../assets/icons/logo-text.svg?react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateLanguage } from "../redux/settings/settingsSlice";
+
 const languages = [
   "C++",
   "Python",
@@ -33,8 +35,8 @@ const Navbar = ({
 
   return (
     <nav className="navbar">
-      <img src={logo} alt="logo" className="logo" />
-      <div className="title">CODE EDITOR</div>
+      <LogoIcon width="45px" className="logo" />
+      <LogoTextIcon className="title" width="350px" />
       <DropDown
         options={languages}
         value={settings?.language}

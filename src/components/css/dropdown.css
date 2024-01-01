@@ -23,9 +23,9 @@
   width: 15px;
 }
 
-.dropdown-icon path {
+/* .dropdown-icon path {
   stroke: var(--text-color-secondary);
-}
+} */
 
 .dropdown-options {
   display: none;

@@ -365,7 +365,7 @@ function App() {
                         )
                       }
                     >
-                      <SaveIcon />
+                      <SaveIcon className="navbar-icon--2" />
                     </button>
                   </Tooltip>
                 </TooltipClick>
@@ -394,7 +394,7 @@ function App() {
                 >
                   <Tooltip text="copy">
                     <button className="navbar-btn">
-                      <CopyIcon className="navbar-icon" />
+                      <CopyIcon />
                     </button>
                   </Tooltip>
                 </TooltipClick>

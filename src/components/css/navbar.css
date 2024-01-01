@@ -1,5 +1,6 @@
 .navbar {
   display: flex;
+  align-items: center;
   justify-content: end;
   padding: 0.5rem;
   gap: 0.5rem;
@@ -31,13 +32,13 @@
   background-color: var(--color-gray-light);
 }
 
-.navbar-icon path {
+/* .navbar-icon path {
   fill: var(--icon-color);
 }
 
 .navbar-icon--2 path {
   stroke: var(--icon-color);
-}
+} */
 
 .navbar-icon--loading path {
   animation: load 1s ease infinite;
@@ -59,7 +60,7 @@
 }
 
 .logo {
-  width: 34px;
+  /* width: 34px; */
   /* margin-right: auto; */
   margin-left: 1rem;
 }

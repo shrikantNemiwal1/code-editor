@@ -1,6 +1,5 @@
 import "./css/modal.css";
 import CloseIcon from "../assets/icons/close.svg?react";
-import { useState } from "react";
 
 const Modal = ({ children, setOpen, open }) => {
   const modalClick = (e) => {

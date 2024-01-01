@@ -62,7 +62,7 @@ const Files = () => {
     <section className="files-container">
       <div className="files-header">
         <button className="add-file-btn" onClick={handleAddFile}>
-          <FileAddIcon className="navbar-icon" />
+          <FileAddIcon />
           <span>New</span>
         </button>
       </div>
@@ -76,7 +76,7 @@ const Files = () => {
               dispatch(setCurrentFile(index));
             }}
           >
-            <FileIcon className="navbar-icon" width="20px" />
+            <FileIcon  width="20px" />
             {isInputEnabled[index] ? (
               <input
                 type="text"
@@ -111,7 +111,7 @@ const Files = () => {
                   className="file-option"
                   onClick={(e) => handleEditFileName(e, index)}
                 >
-                  <EditIcon className="navbar-icon--2" />
+                  <EditIcon />
                   <span>Rename</span>
                 </div>
                 <div

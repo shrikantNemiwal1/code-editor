@@ -22,7 +22,7 @@
   --text-color-tertiary: #ffa116;
   --color-gray-dark: #ededed;
   --color-gray-light: #efe8e8;
-  --icon-color: #a3a3a3;
+  --icon-color: #797979;
 }
 
 body {
@@ -56,7 +56,7 @@ main {
   outline: none;
   border-radius: 0.5rem;
   background-color: var(--bg-color-darker);
-  color:var(--text-color-secondary);
+  color: var(--text-color-secondary);
   padding: 10px;
   padding-top: 2.4rem;
   box-sizing: border-box;
@@ -146,6 +146,21 @@ main {
   width: 100vw;
   height: 100vh;
   text-align: end;
+}
+
+.stroke {
+  stroke: var(--icon-color);
+}
+
+.fill {
+  fill: var(--icon-color);
+}
+
+button:hover .stroke {
+  stroke: var(--text-color-primary);
+}
+button:hover .fill {
+  fill: var(--text-color-primary);
 }
 
 /* .ͼ1 {
