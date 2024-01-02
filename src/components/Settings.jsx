@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DropDown from "./DropDown";
 import "./css/settings.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +5,10 @@ import {
   updateFontSize,
   updateTabSize,
   updateTheme,
+  toggleRunCodeShortcut,
+  toggleFormatCodeShortcut,
 } from "../redux/settings/settingsSlice";
+import ToggleSwitch from "./ToggleSwitch";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -44,6 +46,20 @@ const Settings = () => {
             ]}
             value={settings?.theme}
             onChange={(data) => dispatch(updateTheme(data))}
+          />
+        </li>
+        <li className="settings-item">
+          <div>Format code on pressing Ctrl+S</div>
+          <ToggleSwitch
+            value={settings?.formatCodeShortcutEnabled}
+            onChange={() => dispatch(toggleFormatCodeShortcut())}
+          />
+        </li>
+        <li className="settings-item">
+          <div>Run code on pressing Ctrl+Shift</div>
+          <ToggleSwitch
+            value={settings?.runCodeShortcutEnabled}
+            onChange={() => dispatch(toggleRunCodeShortcut())}
           />
         </li>
       </ul>

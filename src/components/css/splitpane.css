@@ -33,3 +33,19 @@
 .split-pane-separator-icon {
   fill: var(--text-color-secondary);
 }
+
+@media only screen and (max-width: 600px) {
+  .split-pane--horizontal > div {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .split-pane-separator,
+  .split-pane-separator--vertical {
+    opacity: 0;
+  }
+
+  .split-pane--vertical{
+    height: calc(100vh - 5rem);
+  }
+}

@@ -4,7 +4,7 @@ import SeparatorIcon from "../assets/icons/separator-dots.svg?react";
 import SeparatorIconVertical from "../assets/icons/separator-dots-vertical.svg?react";
 
 export default function SplitPane({ children }) {
-  const [paneWidth, setPaneWidth] = useState(500);
+  const [paneWidth, setPaneWidth] = useState(window.innerWidth / 4);
   const splitPaneRef = useRef(null);
 
   const handleMouseDown = (e) => {
@@ -24,7 +24,7 @@ export default function SplitPane({ children }) {
   };
 
   return (
-    <section className="split-pane" ref={splitPaneRef}>
+    <section className="split-pane split-pane--horizontal" ref={splitPaneRef}>
       <div style={{ display: "flex", height: "calc(100% - 5rem)" }}>
         <div
           style={{
@@ -50,9 +50,9 @@ export default function SplitPane({ children }) {
 }
 
 SplitPane.Vertical = function SplitPane({ children }) {
-  const [paneHeight1, setPaneHeight1] = useState(230);
-  const [paneHeight2, setPaneHeight2] = useState(230);
   const splitPaneRef = useRef(null);
+  const [paneHeight1, setPaneHeight1] = useState(window.innerHeight / 3 - 35);
+  const [paneHeight2, setPaneHeight2] = useState(window.innerHeight / 3 - 35);
 
   const handleMouseDown1 = (e) => {
     e.preventDefault();
@@ -67,7 +67,19 @@ SplitPane.Vertical = function SplitPane({ children }) {
   };
 
   const handleMouseMove1 = (e) => {
-    if (e.clientY - 62 > 33) setPaneHeight1(e.clientY - 62);
+    if (e.clientY - 62 > 33 && e.clientY - 29 <= paneHeight1 + paneHeight2) {
+      const diff = paneHeight1 - (e.clientY - 62);
+      setPaneHeight1(paneHeight1 - diff);
+      setPaneHeight2(paneHeight2 + diff);
+    } else if (
+      e.clientY - 62 > 33 &&
+      e.clientY - 29 > paneHeight1 + paneHeight2 &&
+      e.clientY < splitPaneRef.current?.offsetHeight - 30 - 43
+    ) {
+      const diff = paneHeight1 - (e.clientY - 62);
+      setPaneHeight1(paneHeight1 - diff);
+      setPaneHeight2(33);
+    }
   };
 
   const handleMouseMove2 = (e) => {
@@ -76,6 +88,11 @@ SplitPane.Vertical = function SplitPane({ children }) {
       e.clientY < splitPaneRef.current?.offsetHeight - 30
     )
       setPaneHeight2(e.clientY - paneHeight1 - 72);
+    else if (e.clientY - paneHeight1 - 72 <= 33 && e.clientY > 140) {
+      const diff = paneHeight1 - (e.clientY - 62) + 45;
+      setPaneHeight1(paneHeight1 - diff);
+      setPaneHeight2(33);
+    }
   };
 
   const handleMouseUp1 = () => {

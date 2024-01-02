@@ -32,14 +32,6 @@
   background-color: var(--color-gray-light);
 }
 
-/* .navbar-icon path {
-  fill: var(--icon-color);
-}
-
-.navbar-icon--2 path {
-  stroke: var(--icon-color);
-} */
-
 .navbar-icon--loading path {
   animation: load 1s ease infinite;
   transform-origin: 50%;
@@ -60,8 +52,6 @@
 }
 
 .logo {
-  /* width: 34px; */
-  /* margin-right: auto; */
   margin-left: 1rem;
 }
 
@@ -72,4 +62,18 @@
   font-size: 22px;
   line-height: 34px;
   user-select: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .logo,
+  .title {
+    display: none;
+  }
+
+  .run-btn {
+    position: unset;
+    transform: none;
+    margin-right: auto;
+    margin-left: 0;
+  }
 }

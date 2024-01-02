@@ -1,0 +1,33 @@
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  width: 2.7rem;
+  background-color: var(--color-gray-dark);
+  height: 1.5rem;
+  border-radius: 1rem;
+  transition: all 0.1s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 6px 1px inset;
+  cursor: pointer;
+}
+
+.toggle-switch--on {
+  background-color: var(--text-color-tertiary);
+  transition: all 0.1s ease-in;
+}
+
+.toggle-icon {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--icon-color);
+  border-radius: 1rem;
+  margin-left: 0.3rem;
+  transition: all 0.1s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 6px 1px;
+}
+
+.toggle-icon--on {
+  margin-left: 1.4rem;
+  background-color: var(--bg-color-dark);
+  transition: all 0.1s ease-in;
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import {
   saveCode,
@@ -48,29 +48,6 @@ import SaveIcon from "./assets/icons/save.svg?react";
 import DownloadIcon from "./assets/icons/download.svg?react";
 import SparklesIcon from "./assets/icons/sparkle.svg?react";
 
-const languages = [
-  "C++",
-  "Python",
-  "Java",
-  "C",
-  "C#",
-  "JavaScript",
-  "Ruby",
-  "Go",
-  "Kotlin",
-];
-
-const languagesCode2 = {
-  code_cpp: "C++",
-  code_c: "C",
-  code_csharp: "C#",
-  code_java: "Java",
-  code_python: "Python",
-  code_ruby: "Ruby",
-  code_go: "Go",
-  code_kotlin: "Kotlin",
-};
-
 const languagesCode = {
   "C++": "code_cpp",
   C: "code_c",
@@ -98,12 +75,26 @@ function App() {
     localStorage.getItem("light-mode") === "true"
   );
   const [isFormatting, setIsFormatting] = useState(false);
+  const [cancelController, setCancelController] = useState(null);
 
   const handleRunCode = async () => {
-    console.log(code);
+    if (isLoading) {
+      // If already loading, cancel the request
+      if (cancelController) {
+        cancelController.abort();
+      }
+      setIsLoading(false);
+      return;
+    }
+
+    // Create a new AbortController
+    const newCancelController = new AbortController();
+    setCancelController(newCancelController);
+
     setIsLoading(true);
+
     try {
-      await fetch(BASE_URL + "/runcode", {
+      const response = await fetch(BASE_URL + "/runcode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,20 +104,18 @@ function App() {
           input: code?.input,
           language: settings?.language,
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("POST request successful:", data);
-          setOutput(data?.output);
-          setIsSuccess(data?.success);
-        })
-        .catch((error) => {
-          console.error("Error making POST request:", error);
-        });
+        signal: newCancelController.signal,
+      });
+
+      const data = await response.json();
+      setOutput(data?.output);
+      setIsSuccess(data?.success);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      setCancelController(null);
     }
-    setIsLoading(false);
   };
 
   const handleFormatCode = async () => {
@@ -231,11 +220,15 @@ function App() {
 
   const handleKeyDown = (e) => {
     keyPressed[e.key + e.location] = true;
+    console.log(keyPressed);
 
     if (keyPressed.Control1 == true && keyPressed.s0 == true) {
       e.preventDefault();
       handleFormatCode();
-    } else if (keyPressed.Control1 == true && keyPressed.q0 == true) {
+    } else if (
+      (keyPressed.Control2 == true || keyPressed.Control1 == true) &&
+      (keyPressed.Shift2 == true || keyPressed.Shift1 == true)
+    ) {
       e.preventDefault();
       handleRunCode();
       console.log("run code");

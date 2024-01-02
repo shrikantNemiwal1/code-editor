@@ -1,7 +1,3 @@
-.files-container {
-  /* padding-top: 3rem; */
-}
-
 .files-container ul {
   display: flex;
   flex-direction: column;
@@ -39,10 +35,12 @@
   border: 1px solid transparent;
   border-radius: 5px;
   width: 12rem;
+  max-width: 40vw;
 }
 
 .file-name--disabled {
   width: 12rem;
+  max-width: 40vw;
   padding-left: 0.5rem;
   cursor: pointer;
   text-overflow: ellipsis;
@@ -89,7 +87,6 @@
   background-color: var(--bg-color-dark);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px;
   overflow: hidden;
-  /* border: 1px solid rgb(63, 63, 63); */
 }
 
 .file-option {

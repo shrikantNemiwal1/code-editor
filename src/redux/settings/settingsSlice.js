@@ -7,6 +7,8 @@ const settingsSlice = createSlice({
     tabSize: 2,
     theme: "vscode",
     language: "C++",
+    runCodeShortcutEnabled: true,
+    formatCodeShortcutEnabled: true,
   },
   reducers: {
     updateFontSize: (state, action) => {
@@ -21,9 +23,21 @@ const settingsSlice = createSlice({
     updateLanguage: (state, action) => {
       state.language = action.payload;
     },
+    toggleRunCodeShortcut: (state) => {
+      state.runCodeShortcutEnabled = !state.runCodeShortcutEnabled;
+    },
+    toggleFormatCodeShortcut: (state) => {
+      state.formatCodeShortcutEnabled = !state.formatCodeShortcutEnabled;
+    },
   },
 });
 
-export const { updateFontSize, updateTabSize, updateTheme, updateLanguage } =
-  settingsSlice.actions;
+export const {
+  updateFontSize,
+  updateTabSize,
+  updateTheme,
+  updateLanguage,
+  toggleRunCodeShortcut,
+  toggleFormatCodeShortcut,
+} = settingsSlice.actions;
 export default settingsSlice.reducer;

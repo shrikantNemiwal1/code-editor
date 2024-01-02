@@ -1,5 +1,4 @@
 import "./css/sidebar.css";
-import CloseIcon from "../assets/icons/close.svg?react";
 
 const Sidebar = ({ children, setOpen, open }) => {
   const sidebarClick = (e) => {
@@ -15,10 +14,6 @@ const Sidebar = ({ children, setOpen, open }) => {
         className={`sidebar ${open ? "sidebar--open" : ""}`}
         onClick={sidebarClick}
       >
-        {/* <span className="sidebar-name">Settings</span>
-        <button className="close-btn" onClick={() => setOpen(!open)}>
-          <CloseIcon width="16px" className="navbar-icon" />
-        </button> */}
         {children}
       </div>
     </section>

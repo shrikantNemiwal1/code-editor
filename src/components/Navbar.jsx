@@ -37,10 +37,18 @@ const Navbar = ({
     <nav className="navbar">
       <LogoIcon width="45px" className="logo" />
       <LogoTextIcon className="title" width="350px" />
+      <button
+        onClick={handleRunCode}
+        className={`run-btn ${isLoading ? "run-btn--gray" : ""}`}
+      >
+        <span>{isLoading ? "Stop" : "Run"}</span>
+        {isLoading ? <StopIcon /> : <PlayIcon />}
+      </button>
       <DropDown
         options={languages}
         value={settings?.language}
         onChange={(lang) => dispatch(updateLanguage(lang))}
+        className="lang-dropdown"
       />
       <button className="navbar-btn" onClick={toggleDarkMode}>
         {!isLightMode ? <SunIcon /> : <MoonIcon className="navbar-icon--2" />}
@@ -50,13 +58,6 @@ const Navbar = ({
       </button>
       <button className="navbar-btn" onClick={sidebarOpen}>
         <FolderIcon className="navbar-icon--2" />
-      </button>
-      <button
-        onClick={handleRunCode}
-        className={`run-btn ${isLoading ? "run-btn--gray" : ""}`}
-      >
-        <span>{isLoading ? "Stop" : "Run"}</span>
-        {isLoading ? <StopIcon /> : <PlayIcon />}
       </button>
     </nav>
   );
