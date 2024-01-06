@@ -85,7 +85,7 @@ function App() {
     console.log("data received from ext");
     if (event.data && event.data.type === "FROM_EXTENSION") {
       // Access the data from the extension
-      console.log(extensionData);
+      console.log(event.data);
       const extensionData = event.data.data;
 
       // Call your React function with the received data
