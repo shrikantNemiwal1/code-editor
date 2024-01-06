@@ -77,6 +77,21 @@ function App() {
   const [isFormatting, setIsFormatting] = useState(false);
   const [cancelController, setCancelController] = useState(null);
 
+  const makeCodeFile = (data) => {
+    console.log(data);
+  };
+
+  window.addEventListener("message", function (event) {
+    console.log("data received from ext");
+    if (event.data && event.data.type === "FROM_EXTENSION") {
+      // Access the data from the extension
+      const extensionData = event.data.data;
+
+      // Call your React function with the received data
+      makeCodeFile(extensionData);
+    }
+  });
+
   const handleRunCode = async () => {
     if (isLoading) {
       // If already loading, cancel the request
