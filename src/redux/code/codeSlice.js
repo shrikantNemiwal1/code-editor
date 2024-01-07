@@ -74,14 +74,15 @@ const codeSlice = createSlice({
       state.codeData[state.currentCode][languages[action.payload.language]] =
         state.boilerplateData[languages[action.payload.language]];
     },
-    addFile: (state) => {
+    addFile: (state, action) => {
       state.codeData.push({
         id: Date.now(),
-        name: "",
-        input: "",
-        expOutput: "",
+        name: action?.payload?.name || "",
+        input: action?.payload?.input || "",
+        expOutput: action?.payload?.expOutput || "",
         ...state.boilerplateData,
       });
+      state.currentCode = state.codeData.length - 1;
     },
     deleteFile: (state, action) => {
       if (action.payload === 0) return;

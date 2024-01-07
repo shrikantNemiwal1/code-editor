@@ -11,6 +11,7 @@ import { basicSetup } from "@uiw/codemirror-extensions-basic-setup";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 const BASE_URL = import.meta.env.VITE_REACT_API_URL;
+import { addFile, setCurrentFile } from "./redux/code/codeSlice";
 
 // Editor Themes
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
@@ -76,22 +77,33 @@ function App() {
   );
   const [isFormatting, setIsFormatting] = useState(false);
   const [cancelController, setCancelController] = useState(null);
+  const [testCases, setTestCases] = useState(null);
+  const [istestCasesPassed, setIsTestCasesPassed] = useState("none");
 
   const makeCodeFile = (data) => {
     console.log(data);
+    setTestCases(data);
+    dispatch(addFile({ input: data[0], expOutput: data[1] }));
   };
 
-  window.addEventListener("message", function (event) {
-    console.log("data received from ext");
-    if (event.data && event.data.type === "FROM_EXTENSION") {
-      // Access the data from the extension
-      console.log(event.data);
-      const extensionData = event.data.data;
+  function formatString(input) {
+    return input
+      .replace(/\s+/g, " ")
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line !== "")
+      .join("\n");
+  }
 
-      // Call your React function with the received data
-      makeCodeFile(extensionData);
-    }
-  });
+  useEffect(() => {
+    if (testCases === null || testCases === undefined)
+      window.addEventListener("message", function (event) {
+        if (event.data && event.data.type === "FROM_EXTENSION") {
+          const extensionData = event.data.data;
+          makeCodeFile(extensionData);
+        }
+      });
+  }, []);
 
   const handleRunCode = async () => {
     if (isLoading) {
@@ -126,6 +138,15 @@ function App() {
       const data = await response.json();
       setOutput(data?.output);
       setIsSuccess(data?.success);
+      if (!data?.success) {
+        setIsTestCasesPassed("error");
+      } else if (formatString(code?.expOutput) !== "") {
+        if (formatString(data?.output) === formatString(code?.expOutput))
+          setIsTestCasesPassed("true");
+        else setIsTestCasesPassed("false");
+      } else {
+        setIsTestCasesPassed("none");
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -149,8 +170,6 @@ function App() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("POST format request successful:", data);
-          console.log(data);
           dispatch(
             saveCode({
               code:
@@ -236,7 +255,6 @@ function App() {
 
   const handleKeyDown = (e) => {
     keyPressed[e.key + e.location] = true;
-    console.log(keyPressed);
 
     if (keyPressed.Control1 == true && keyPressed.s0 == true) {
       e.preventDefault();
@@ -247,7 +265,6 @@ function App() {
     ) {
       e.preventDefault();
       handleRunCode();
-      console.log("run code");
     }
   };
 
@@ -318,7 +335,16 @@ function App() {
             </div>
             <div className="textarea-container">
               <div className="textarea-header">
-                <span>Output</span>
+                <span>
+                  Output{" "}
+                  {istestCasesPassed === "true"
+                    ? "(Passed)"
+                    : istestCasesPassed === "false"
+                    ? "(Failed)"
+                    : istestCasesPassed === "error"
+                    ? "(Error)"
+                    : ""}
+                </span>
                 <TooltipClick text="copied!" value={output}>
                   <button className="navbar-btn">
                     <CopyIcon className="navbar-icon" />
